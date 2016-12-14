@@ -83,16 +83,16 @@ bindkey $PER_DIRECTORY_HISTORY_TOGGLE per-directory-history-toggle-history
 # implementation details
 #-------------------------------------------------------------------------------
 
-_per_directory_history_directory="$HISTORY_BASE${PWD:A}/history"
+_per_directory_history_directory="${PWD:A}/.zhistory"
 
 function _per-directory-history-change-directory() {
-  _per_directory_history_directory="$HISTORY_BASE${PWD:A}/history"
+  _per_directory_history_directory="${PWD:A}/.zhistory"
   mkdir -p ${_per_directory_history_directory:h}
   if [[ $_per_directory_history_is_global == false ]]; then
     #save to the global history
     fc -AI $HISTFILE
     #save history to previous file
-    local prev="$HISTORY_BASE${OLDPWD:A}/history"
+    local prev="${OLDPWD:A}/.zhistory"
     mkdir -p ${prev:h}
     fc -AI $prev
 
